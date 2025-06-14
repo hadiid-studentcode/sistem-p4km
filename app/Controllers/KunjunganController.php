@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\JadwalKunjunganModel;
+use App\Models\LaporanPembinaanModel;
 use App\Models\UsersModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -11,14 +12,17 @@ class KunjunganController extends BaseController
 {
     protected $usersModel;
     protected $jadwalKunjunganModel;
+    protected $laporanPembinaanModel;
     public function __construct()
     {
         $this->usersModel = new UsersModel();
         $this->jadwalKunjunganModel = new JadwalKunjunganModel();
+        $this->laporanPembinaanModel = new LaporanPembinaanModel();
     }
     public function index()
     {
-        $user_p4km = $this->usersModel->where('role', 'p4km')->findAll();
+        $user_p4km = $this->usersModel->getUserByRoleP4KM();
+
         $jadwalKunjungan = $this->jadwalKunjunganModel->getJadwalKunjunganJoinIdP4kmDitugaskan();
 
         return view('jadwalkunjungan', compact('user_p4km', 'jadwalKunjungan'));
@@ -39,7 +43,14 @@ class KunjunganController extends BaseController
             'agenda' => $agenda,
             'status' => 'Terjadwal'
         ];
-        $this->jadwalKunjunganModel->createData($data);
+        $jadwalKunjungan = $this->jadwalKunjunganModel->insert($data);
+
+        // buat laporan pembinaan
+        $this->laporanPembinaanModel->insert([
+            'id_jadwal' => $jadwalKunjungan,
+        ]);
+
+
         return redirect()->to('/jadwalkunjungan')->with('success', 'Jadwal kunjungan berhasil dibuat');
     }
     public function update($id)

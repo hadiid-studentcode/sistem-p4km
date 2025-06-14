@@ -48,4 +48,8 @@ class UsersModel extends Model
     {
         return $this->where('username', $username)->first();
     }
+    public function getUserByRoleP4KM()
+    {
+        return $this->where('role', 'p4km')->findAll();
+    }
 }

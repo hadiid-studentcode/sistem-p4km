@@ -44,5 +44,17 @@ class LaporanPembinaanModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-   
+
+    public function getLaporanPembinaanByP4km()
+    {
+        return $this->select('
+        tabel_laporanpembinaan.*,
+        tabel_jadwalkunjungan.*,
+        tb_users.nama_lengkap as nama_p4km,
+
+        ')
+            ->join('tabel_jadwalkunjungan', 'tabel_jadwalkunjungan.id = tabel_laporanpembinaan.id_jadwal')
+            ->join('tb_users', 'tabel_jadwalkunjungan.id_p4km_ditugaskan = tb_users.id')
+            ->findAll();
+    }
 }

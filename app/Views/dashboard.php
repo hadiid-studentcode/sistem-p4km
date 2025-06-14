@@ -10,7 +10,8 @@
 <body>
     <h1>Halaman Dashboard</h1>
 
-  
+    <p>Selamat datang, <?= session()->get('username') ?></p>
+    <p>role = <?= session()->get('role') ?></p>
 
     <a href="<?= base_url('logout') ?>">Logout</a>
 </body>

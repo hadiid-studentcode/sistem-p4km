@@ -21,7 +21,7 @@ $routes->put('/jadwalkunjungan/(:num)', 'KunjunganController::update/$1', ['filt
 $routes->delete('/jadwalkunjungan/(:num)', 'KunjunganController::delete/$1', ['filter' => 'role:kabid']);
 
 // laporan pembinaan
-$routes->get('/laporanpembinaan', 'PembinaanController::index', ['filter' => 'role:kabid,p4km']);
+$routes->get('/laporanpembinaan', 'LaporanPembinaanController::index', ['filter' => 'role:kabid,p4km']);
 
 // cetak laporan
 $routes->get('/cetaklaporan', 'CetakLaporanControler::index', ['filter' => 'role:kepala dinas']);
