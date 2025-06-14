@@ -14,7 +14,7 @@
 
     <h1>Login</h1>
     <h2>Form Login</h2>
-    <form action="<?= url_to('LoginController::attemptLogin') ?>" method="post">
+    <form action="<?= base_url('login') ?>" method="post">
         <?= csrf_field() ?>
         <label for="username">Username</label><br>
         <input type="text" id="username" name="username" required><br><br>

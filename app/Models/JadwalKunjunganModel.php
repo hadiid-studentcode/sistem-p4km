@@ -12,7 +12,7 @@ class JadwalKunjunganModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_p4km_ditugaskan', 'id_kabid_pembuat', 'tanggal_kunjungan', 'lokasi_kunjungan', 'agenda', ' status'];
+    protected $allowedFields    = ['id_p4km_ditugaskan', 'id_kabid_pembuat', 'tanggal_kunjungan', 'lokasi_kunjungan', 'agenda', 'status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -44,21 +44,26 @@ class JadwalKunjunganModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getJadwalKunjungan()
+
+    public function getJadwalKunjunganJoinIdP4kmDitugaskan()
     {
-        return $this->findAll();
+        return $this->select('
+            tabel_jadwalkunjungan.*,
+            p4km.nama_lengkap as nama_p4km,
+        ')
+            ->join('tb_users as p4km', 'p4km.id = tabel_jadwalkunjungan.id_p4km_ditugaskan')
+            ->findAll();
     }
-    public function createJadwalKunjungan(array $data)
+    public function createData($data)
     {
         return $this->insert($data);
     }
-    public function updateJadwalKunjungan(int $id, array $data)
+    public function updateData($id, $data)
     {
         return $this->update($id, $data);
     }
-    public function deleteJadwalKunjungan(int $id)
+    public function deleteData($id)
     {
         return $this->delete($id);
     }
-
 }

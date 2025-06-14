@@ -44,20 +44,5 @@ class LaporanPembinaanModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getLaporanPembinaan()
-    {
-        return $this->findAll();
-    }
-    public function createLaporanPembinaan(array $data)
-    {
-        return $this->insert($data);
-    }
-    public function updateLaporanPembinaan(int $id, array $data)
-    {
-        return $this->update($id, $data);
-    }
-    public function deleteLaporanPembinaan(int $id)
-    {
-        return $this->delete($id);
-    }
+   
 }

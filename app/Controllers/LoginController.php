@@ -8,6 +8,11 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class LoginController extends BaseController
 {
+    protected $usersModel;
+    public function __construct()
+    {
+        $this->usersModel = new UsersModel();
+    }
     public function index()
     {
 
@@ -23,10 +28,9 @@ class LoginController extends BaseController
 
     public function attemptLogin()
     {
-        $model = new UsersModel();
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
-        $user = $model->getUserByUsername($username);
+        $user = $this->usersModel->getUserByUsername($username);
 
 
         if ($user['username'] == $username && $user['password'] == $password) {
@@ -41,7 +45,6 @@ class LoginController extends BaseController
 
             return redirect()->to('dashboard');
         } else {
-            dd('error');
             return redirect()->back()->with('error', 'Username dan Password Salah');
         }
     }
@@ -50,6 +53,6 @@ class LoginController extends BaseController
     {
         $session = session();
         $session->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/');
     }
 }

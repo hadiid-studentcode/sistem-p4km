@@ -9,6 +9,10 @@
 
 <body>
     <h1>Halaman Dashboard</h1>
+
+  
+
+    <a href="<?= base_url('logout') ?>">Logout</a>
 </body>
 
 </html>
