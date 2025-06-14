@@ -25,7 +25,24 @@ class Role implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //
+        $session = session();
+
+        // cek apakah user sudah login
+        if (!$session->get('isLogin')) {
+            // jika belum login, redirect ke halaman login
+            return redirect()->to('/');
+        }
+
+        // cek apakah filter ini diberikan argumen role
+        if(empty($arguments)) {
+            // jika tidak ada argumen, berarti filter ini tidak membatasi role
+            return;
+        }
+        // cek apakah user memiliki role yang sesuai
+        if (!in_array($session->get('role'), $arguments)) {
+            // jika tidak sesuai, redirect ke halaman dashboard
+            return redirect()->to('/dashboard')->with('error', 'Anda tidak memiliki akses ke halaman ini');
+        }
     }
 
     /**

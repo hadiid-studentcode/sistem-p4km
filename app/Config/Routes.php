@@ -10,6 +10,7 @@ $routes->get('/', 'LoginController::index');
 $routes->post('login', 'LoginController::attemptLogin');
 
 
-$routes->get('dashboard', 'DashboardController::index');
-$routes->get('jadwalkunjungan', 'KunjunganControler::index');
-$routes->get('laporanpembinaan', 'PembinaanController::index');
+$routes->get('dashboard', 'DashboardController::index', ['filter' => 'role:kabid,p4km,kepala dinas']);
+$routes->get('jadwalkunjungan', 'KunjunganController::index', ['filter' => 'role:kabid']);
+$routes->get('laporanpembinaan', 'PembinaanController::index', ['filter' => 'role:kabid,p4km']);
+$routes->get('cetaklaporan', 'CetakLaporanControler::index', ['filter' => 'role:kepala dinas']);
