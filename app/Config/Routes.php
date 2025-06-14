@@ -5,6 +5,11 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'AuthController::index');
-$routes->get('/login', 'LoginController::index');
-$routes->get('/masuk', 'MasukController::index');
+// login
+$routes->get('/', 'LoginController::index');
+$routes->post('login', 'LoginController::attemptLogin');
+
+
+$routes->get('dashboard', 'DashboardController::index');
+$routes->get('jadwalkunjungan', 'KunjunganControler::index');
+$routes->get('laporanpembinaan', 'PembinaanController::index');
