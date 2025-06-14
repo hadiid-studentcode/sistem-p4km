@@ -1,43 +1,79 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<?= $this->extend('templates/layout') ?>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
+<?= $this->section('styles') ?>
 
-    <body>
-        <h1>Laporan Pembinaan</h1>
+<?= $this->endSection() ?>
 
-        <h2>Data Laporan</h2>
+<?= $this->section('content') ?>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Laporan Pembinaan</h4>
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Lokasi Pembinaan</th>
-                    <th>Tanggal Kunjungan</th>
-                    <th>Status Kunjungan</th>
-                    <th>Status Laporan</th>
-                    <th>Aksi</th>
-                   
-                </tr>
+   
+    <div class="card">
+        <h5 class="card-header">Responsive Table</h5>
+        
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr class="text-nowrap">
+                        <th>#</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                        <th>Table heading</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-            <tbody>
-                <?php $no = 1; ?>
-                <?php foreach ($laporanPembinaanByP4km as $laporan): ?>
-                <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= $laporan['lokasi_kunjungan'] ?></td>
-                    <td><?= $laporan['tanggal_kunjungan'] ?></td>
-                    <td><?= $laporan['status'] ?></td>
-                    <td><?= $laporan['status_laporan'] ?></td>
-                </tr>
-                <?php endforeach ?>
-            </tbody>
-            </thead>
-        </table>
-    </body>
+<?= $this->endSection() ?>
 
-    </html>
+
+<?= $this->section('scripts') ?>
+
+<?= $this->endSection() ?>

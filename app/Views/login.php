@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html
     lang="en"
     class="light-style customizer-hide"
@@ -59,9 +58,9 @@
                 <!-- Register -->
                 <div class="card">
                     <div class="card-body">
-                     
-                        <h4 class="mb-2">Welcome to Sistem P4KM! 👋</h4>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
+
+                        <h4 class="mb-2 text-center">Sistem P4KM</h4>
+                        <p class="mb-4 text-center">Silakan login untuk melanjutkan</p>
 
                         <form id="formAuthentication" class="mb-3" action="<?= base_url('login') ?>" method="POST">
                             <?= csrf_field() ?>
@@ -76,7 +75,7 @@
                                     autofocus />
                             </div>
                             <div class="mb-3 form-password-toggle">
-                               
+
                                 <div class="input-group input-group-merge">
                                     <input
                                         type="password"
@@ -88,13 +87,13 @@
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
-                          
+
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
                             </div>
                         </form>
 
-                      
+
                     </div>
                 </div>
                 <!-- /Register -->
@@ -104,7 +103,7 @@
 
     <!-- / Content -->
 
-  
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="<?= base_url('assets/vendor/libs/jquery/jquery.js') ?>"></script>
@@ -122,7 +121,7 @@
 
     <!-- Page JS -->
 
-  
+
 </body>
 
 </html>

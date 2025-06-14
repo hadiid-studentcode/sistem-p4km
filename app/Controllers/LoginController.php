@@ -32,6 +32,9 @@ class LoginController extends BaseController
         $password = $this->request->getPost('password');
         $user = $this->usersModel->getUserByUsername($username);
 
+    
+
+
 
         if ($user['username'] == $username && $user['password'] == $password) {
             $session = session();
@@ -43,7 +46,7 @@ class LoginController extends BaseController
                 'isLogin' => true,
             ]);
 
-            return redirect()->to('dashboard');
+            return redirect()->to('/dashboard');
         } else {
             return redirect()->back()->with('error', 'Username dan Password Salah');
         }
