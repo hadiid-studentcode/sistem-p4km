@@ -19,16 +19,12 @@
         </div>
 
         <div class="card-body">
-            <?php if (session()
-                ->getFlashdata("success")
-            ): ?>
+            <?php if (session()->getFlashdata("success")): ?>
                 <div class="alert alert-success alert-dismissible" role="alert">
-                    <?= session()
-                        ->getFlashdata("success") ?>
+                    <?= session()->getFlashdata("success") ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            <?php
-            endif; ?>
+            <?php endif; ?>
 
 
             <div class="table-responsive text-nowrap">
@@ -48,19 +44,20 @@
                         <?php $no = 1; ?>
                         <?php foreach ($jadwalKunjungan as $jadwal): ?>
                             <tr>
-                                <th scope="row"><?= $no++
-                                                ?>
+                                <th scope="row"><?= $no++ ?>
                                 <td><?= $jadwal["lokasi_kunjungan"] ?></td>
                                 <td><?= $jadwal["tanggal_kunjungan"] ?></td>
                                 <td><?= $jadwal["nama_p4km"] ?></td>
                                 <td>
-                                    <?php if ($jadwal["status"] == "Terjadwal"): ?>
+                                    <?php if (
+                                        $jadwal["status"] == "Terjadwal"
+                                    ): ?>
                                         <span class="badge bg-info">Terjadwal</span>
-                                    <?php
-                                    elseif ($jadwal["status"] == "Selesai"): ?>
+                                    <?php elseif (
+                                        $jadwal["status"] == "Selesai"
+                                    ): ?>
                                         <span class="badge bg-success">Selesai</span>
-                                    <?php
-                                    endif; ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td>
 
@@ -75,8 +72,7 @@
 
                             </tr>
 
-                        <?php
-                        endforeach; ?>
+                        <?php endforeach; ?>
 
                     </tbody>
                 </table>
@@ -98,26 +94,25 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan</label>
-                                <input type="date" id="tanggalKunjungan" name="tanggalKunjungan" class="form-control" />
+                                <input type="date" id="tanggalKunjungan" name="tanggalKunjungan" class="form-control" required />
                             </div>
                             <div class="col">
                                 <label for="lokasiKunjungan" class="form-label">Lokasi Kunjungan</label>
-                                <input type="text" id="lokasiKunjungan" name="lokasiKunjungan" class="form-control" placeholder="Contoh: SMP Harapan Bangsa" />
+                                <input type="text" id="lokasiKunjungan" name="lokasiKunjungan" class="form-control" placeholder="Contoh: SMP Harapan Bangsa" required />
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="p4km" class="form-label">Staf P4km Ditugaskan</label>
-                            <select name="p4km_id" class="form-select" id="p4km">
+                            <select name="p4km_id" class="form-select" id="p4km" required>
                                 <option value="">Pilih Staf P4km</option>
                                 <?php foreach ($user_p4km as $p4km): ?>
                                     <option value="<?= $p4km["id"] ?>"><?= $p4km["nama_lengkap"] ?></option>
-                                <?php
-                                endforeach; ?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="agenda" class="form-label">Agenda Kunjungan</label>
-                            <textarea name="agenda" class="form-control" rows="3" id="agenda"></textarea>
+                            <textarea name="agenda" class="form-control" rows="3" id="agenda" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -181,13 +176,15 @@
 
                                 </div>
                                 <p class="mb-1">
-                                    <?php if ($jadwal["status"] == "Terjadwal"): ?>
+                                    <?php if (
+                                        $jadwal["status"] == "Terjadwal"
+                                    ): ?>
                                         <span class="badge bg-info">Terjadwal</span>
-                                    <?php
-                                    elseif ($jadwal["status"] == "Selesai"): ?>
+                                    <?php elseif (
+                                        $jadwal["status"] == "Selesai"
+                                    ): ?>
                                         <span class="badge bg-success">Selesai</span>
-                                    <?php
-                                    endif; ?>
+                                    <?php endif; ?>
                                 </p>
                             </a>
                             <a href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -205,15 +202,16 @@
                 </div>
             </div>
         </div>
-    <?php
-    endforeach; ?>
+    <?php endforeach; ?>
 
     <!-- modal edit data jadwal kunjungan -->
     <?php foreach ($jadwalKunjungan as $jadwal): ?>
 
         <div class="modal fade" id="editJadwalKunjungan_<?= $jadwal["id"] ?>" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <form action="<?= base_url("/jadwalkunjungan/" . $jadwal["id"]) ?>" method="post">
+                <form action="<?= base_url(
+                                    "/jadwalkunjungan/" . $jadwal["id"]
+                                ) ?>" method="post">
                     <?= csrf_field() ?>
                     <!-- method PUT -->
                     <input type="hidden" name="_method" value="PUT">
@@ -240,11 +238,12 @@
                                 <select name="p4km_id" class="form-select" id="p4km">
                                     <option value="">Pilih Staf P4km</option>
                                     <?php foreach ($user_p4km as $p4km): ?>
-                                        <option value="<?= $p4km["id"] ?>" <?= $jadwal["id_p4km_ditugaskan"] == $p4km["id"] ? "selected" : "" ?>>
+                                        <option value="<?= $p4km["id"] ?>" <?= $jadwal["id_p4km_ditugaskan"] == $p4km["id"]
+                                                    ? "selected"
+                                                    : "" ?>>
                                             <?= $p4km["nama_lengkap"] ?>
                                         </option>
-                                    <?php
-                                    endforeach; ?>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -256,8 +255,12 @@
                                 <label for="status" class="form-label">Status</label>
                                 <select name="status" class="form-select" id="status">
                                     <option value="">Pilih Status Jadwal</option>
-                                    <option value="Terjadwal" <?= $jadwal["status"] == "Terjadwal" ? "selected" : "" ?>>Terjadwal</option>
-                                    <option value="Selesai" <?= $jadwal["status"] == "Selesai" ? "selected" : "" ?>>Selesai</option>
+                                    <option value="Terjadwal" <?= $jadwal["status"] == "Terjadwal"
+                                                                    ? "selected"
+                                                                    : "" ?>>Terjadwal</option>
+                                    <option value="Selesai" <?= $jadwal["status"] == "Selesai"
+                                                                ? "selected"
+                                                                : "" ?>>Selesai</option>
                                 </select>
                             </div>
                         </div>
@@ -271,8 +274,7 @@
                 </form>
             </div>
         </div>
-    <?php
-    endforeach; ?>
+    <?php endforeach; ?>
 
     <!-- modal peringatan konfirmasi hapus data -->
     <?php foreach ($jadwalKunjungan as $jadwal): ?>
@@ -297,7 +299,9 @@
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Batal
                         </button>
-                        <form id="deleteForm" action="<?= base_url('jadwalkunjungan/' . $jadwal['id'])?>" method="POST" class="d-inline">
+                        <form id="deleteForm" action="<?= base_url(
+                                                            "jadwalkunjungan/" . $jadwal["id"]
+                                                        ) ?>" method="POST" class="d-inline">
                             <?= csrf_field() ?>
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger">Ya, Hapus</button>
@@ -306,8 +310,7 @@
                 </div>
             </div>
         </div>
-    <?php
-    endforeach; ?>
+    <?php endforeach; ?>
 
 
 
