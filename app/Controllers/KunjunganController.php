@@ -25,6 +25,7 @@ class KunjunganController extends BaseController
 
         $jadwalKunjungan = $this->jadwalKunjunganModel->getJadwalKunjunganJoinIdP4kmDitugaskan();
 
+
         return view('jadwalkunjungan', compact('user_p4km', 'jadwalKunjungan'));
     }
 
@@ -59,6 +60,7 @@ class KunjunganController extends BaseController
         $lokasiKunjungan = $this->request->getPost('lokasiKunjungan');
         $p4km_id = $this->request->getPost('p4km_id');
         $agenda = $this->request->getPost('agenda');
+        $status = $this->request->getPost('status');
 
         $data = [
             'tanggal_kunjungan' => $tanggalKunjungan,
@@ -66,7 +68,7 @@ class KunjunganController extends BaseController
             'id_p4km_ditugaskan' => $p4km_id,
             'id_kabid_pembuat' => session()->get('user_id'),
             'agenda' => $agenda,
-            'status' => 'Terjadwal'
+            'status' => $status,
         ];
         $this->jadwalKunjunganModel->updateData($id, $data);
         return redirect()->to('/jadwalkunjungan')->with('success', 'Jadwal kunjungan berhasil diupdate');
