@@ -17,7 +17,9 @@ class LaporanPembinaanController extends BaseController
 
     public function index()
     {
-        $laporanPembinaanByP4km = $this->laporanPembinaanModel->getLaporanPembinaanByP4km();
+        $laporanPembinaanByP4km = $this
+            ->laporanPembinaanModel
+            ->getLaporanPembinaanByP4km();
 
         return view('laporanpembinaan', compact('laporanPembinaanByP4km'));
     }

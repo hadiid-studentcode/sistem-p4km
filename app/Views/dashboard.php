@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-primary">Selamat Datang <?= session()->get('username') ?></h5>
                             <p class="mb-4">
-                               Anda Login Sebagai <strong><?= session()->get('role') ?></strong> di Sistem Informasi P4KM
+                                Anda Login Sebagai <strong><?= session()->get('role') ?></strong> di Sistem Informasi P4KM
                             </p>
 
                             <a href="<?= base_url('laporanpembinaan') ?>" class="btn btn-sm btn-outline-primary">Lihat Laporan</a>
@@ -35,9 +35,9 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
-  
+
 </div>
 
 <?= $this->endSection() ?>

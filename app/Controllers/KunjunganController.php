@@ -21,61 +21,76 @@ class KunjunganController extends BaseController
     }
     public function index()
     {
-        $user_p4km = $this->usersModel->getUserByRoleP4KM();
+        $user_p4km = $this
+            ->usersModel
+            ->getUserByRoleP4KM();
 
-        $jadwalKunjungan = $this->jadwalKunjunganModel->getJadwalKunjunganJoinIdP4kmDitugaskan();
-
+        $jadwalKunjungan = $this
+            ->jadwalKunjunganModel
+            ->getJadwalKunjunganJoinIdP4kmDitugaskan();
 
         return view('jadwalkunjungan', compact('user_p4km', 'jadwalKunjungan'));
     }
 
     public function store()
     {
-        $tanggalKunjungan = $this->request->getPost('tanggalKunjungan');
-        $lokasiKunjungan = $this->request->getPost('lokasiKunjungan');
-        $p4km_id = $this->request->getPost('p4km_id');
-        $agenda = $this->request->getPost('agenda');
+        $tanggalKunjungan = $this
+            ->request
+            ->getPost('tanggalKunjungan');
+        $lokasiKunjungan = $this
+            ->request
+            ->getPost('lokasiKunjungan');
+        $p4km_id = $this
+            ->request
+            ->getPost('p4km_id');
+        $agenda = $this
+            ->request
+            ->getPost('agenda');
 
-        $data = [
-            'tanggal_kunjungan' => $tanggalKunjungan,
-            'lokasi_kunjungan' => $lokasiKunjungan,
-            'id_p4km_ditugaskan' => $p4km_id,
-            'id_kabid_pembuat' => session()->get('user_id'),
-            'agenda' => $agenda,
-            'status' => 'Terjadwal'
-        ];
-        $jadwalKunjungan = $this->jadwalKunjunganModel->insert($data);
+        $data = ['tanggal_kunjungan' => $tanggalKunjungan, 'lokasi_kunjungan' => $lokasiKunjungan, 'id_p4km_ditugaskan' => $p4km_id, 'id_kabid_pembuat' => session()->get('user_id'), 'agenda' => $agenda, 'status' => 'Terjadwal'];
+        $jadwalKunjungan = $this
+            ->jadwalKunjunganModel
+            ->insert($data);
 
         // buat laporan pembinaan
-        $this->laporanPembinaanModel->insert([
-            'id_jadwal' => $jadwalKunjungan,
-        ]);
+        $this
+            ->laporanPembinaanModel
+            ->insert(['id_jadwal' => $jadwalKunjungan,]);
 
-
-        return redirect()->to('/jadwalkunjungan')->with('success', 'Jadwal kunjungan berhasil dibuat');
+        return redirect()->to('/jadwalkunjungan')
+            ->with('success', 'Jadwal kunjungan berhasil dibuat');
     }
     public function update($id)
     {
-        $tanggalKunjungan = $this->request->getPost('tanggalKunjungan');
-        $lokasiKunjungan = $this->request->getPost('lokasiKunjungan');
-        $p4km_id = $this->request->getPost('p4km_id');
-        $agenda = $this->request->getPost('agenda');
-        $status = $this->request->getPost('status');
+        $tanggalKunjungan = $this
+            ->request
+            ->getPost('tanggalKunjungan');
+        $lokasiKunjungan = $this
+            ->request
+            ->getPost('lokasiKunjungan');
+        $p4km_id = $this
+            ->request
+            ->getPost('p4km_id');
+        $agenda = $this
+            ->request
+            ->getPost('agenda');
+        $status = $this
+            ->request
+            ->getPost('status');
 
-        $data = [
-            'tanggal_kunjungan' => $tanggalKunjungan,
-            'lokasi_kunjungan' => $lokasiKunjungan,
-            'id_p4km_ditugaskan' => $p4km_id,
-            'id_kabid_pembuat' => session()->get('user_id'),
-            'agenda' => $agenda,
-            'status' => $status,
-        ];
-        $this->jadwalKunjunganModel->updateData($id, $data);
-        return redirect()->to('/jadwalkunjungan')->with('success', 'Jadwal kunjungan berhasil diupdate');
+        $data = ['tanggal_kunjungan' => $tanggalKunjungan, 'lokasi_kunjungan' => $lokasiKunjungan, 'id_p4km_ditugaskan' => $p4km_id, 'id_kabid_pembuat' => session()->get('user_id'), 'agenda' => $agenda, 'status' => $status,];
+        $this
+            ->jadwalKunjunganModel
+            ->update($id, $data);
+        return redirect()->to('/jadwalkunjungan')
+            ->with('success', 'Jadwal kunjungan berhasil diupdate');
     }
     public function delete($id)
     {
-        $this->jadwalKunjunganModel->delete($id);
-        return redirect()->to('/jadwalkunjungan')->with('success', 'Jadwal kunjungan berhasil dihapus');
+        $this
+            ->jadwalKunjunganModel
+            ->delete($id);
+        return redirect()->to('/jadwalkunjungan')
+            ->with('success', 'Jadwal kunjungan berhasil dihapus');
     }
 }
